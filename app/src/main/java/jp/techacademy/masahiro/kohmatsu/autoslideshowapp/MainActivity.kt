@@ -10,8 +10,11 @@ import android.provider.MediaStore
 import android.content.ContentUris
 import android.database.Cursor
 import android.view.View
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -73,6 +76,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // PERMISSION_REQUEST_CODE が等しければ getContentsInfo()を返す
                     getContentsInfo()
+                }else {
+                    //todo パーミッション拒否した際のコードを書く
+                    //Toastを設定
+                    Toast.makeText(this,"許可されませんでしたので、アプリを終了いたします。",LENGTH_LONG)
+
                 }
         }
     }
@@ -112,6 +120,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     //イベントハンドラで、ボタンをクリックした際の処理を記述
     override fun onClick(v: View) {
+
         if (v.id == R.id.forward_button) {// forward_button　がクリックされたときに、以下の処理を実行
 
             if (cursor!!.moveToNext()) {//cursor が「次」に移動できたら、その位置のデータに対し、以下の処理を実行
